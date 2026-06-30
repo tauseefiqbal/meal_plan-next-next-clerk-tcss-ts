@@ -66,7 +66,11 @@ const handleCheckoutSessionCompleted = async (
   }
 
   // Retrieve subscription ID from the session
-  const subscriptionId = session.subscription as string;
+  // Stripe's subscription property can be a string (ID) or an expanded Subscription object
+  const subscription = (session as any).subscription;
+  const subscriptionId = typeof subscription === 'string'
+    ? subscription
+    : subscription?.id;
 
   if (!subscriptionId) {
     console.error("[Webhook] No subscription ID found in session.");
@@ -91,7 +95,11 @@ const handleCheckoutSessionCompleted = async (
 
 // Handler for failed invoice payments
 const handleInvoicePaymentFailed = async (invoice: Stripe.Invoice) => {
-  const subscriptionId = invoice.subscription as string;
+  // Stripe's subscription property can be a string (ID) or an expanded Subscription object
+  const subscription = (invoice as any).subscription;
+  const subscriptionId = typeof subscription === 'string'
+    ? subscription
+    : subscription?.id;
 
   if (!subscriptionId) {
     console.error("[Webhook] No subscription ID found in invoice.");

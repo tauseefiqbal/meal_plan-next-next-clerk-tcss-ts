@@ -37,7 +37,7 @@ export default function NavBar() {
             >
               Profile
             </Link>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           </Show>
 
           <Show when="signed-out">
