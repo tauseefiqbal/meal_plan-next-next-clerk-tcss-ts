@@ -4,8 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma"; // <-- import Prisma client
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder_for_build");
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "whsec_placeholder_for_build";
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
