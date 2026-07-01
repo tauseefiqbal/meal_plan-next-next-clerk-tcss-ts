@@ -1,33 +1,38 @@
 # 🥗 AI Meal Plan — Full Stack SaaS Web App
 
-> A full-stack AI-powered SaaS application that generates personalized 7-day meal plans based on your dietary preferences, allergies, and calorie goals — backed by a subscription model.
+> A full‑stack AI‑powered SaaS application built with Next.js (frontend + backend) and TypeScript, featuring Clerk authentication, AI‑generated personalized 7‑day meal plans, and Stripe subscription billing. Users receive customized meal plans tailored to their dietary preferences, allergies, and calorie goals. The platform includes  Stripe webhook automation for subscription lifecycle events such as payment success, renewal, cancellation, and failed payments.
+
 
 ---
 
 ## 📑 Table of Contents
 
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Deployment](#-deployment)
-- [Test and Admin Users Credentials](#-test-and-admin-users-credentials)
-  - [Test User Credentials](#test-user-credentials)
-  - [Admin User Credentials](#admin-user-credentials)
-- [How To Use App For Regular User](#-how-to-use-app-for-regular-user)
-  - [Step 1: Create an Account](#step-1-create-an-account)
-  - [Step 2: Choose a Subscription Plan](#step-2-choose-a-subscription-plan)
-  - [Step 3: Generate Your Meal Plan](#step-3-generate-your-meal-plan)
-  - [Step 4: Manage Your Profile](#step-4-manage-your-profile)
-- [How To Use App For Admin User](#-how-to-use-app-for-admin-user)
-  - [Managing Users via Clerk Dashboard](#managing-users-via-clerk-dashboard)
-  - [Managing Subscriptions via Stripe Dashboard](#managing-subscriptions-via-stripe-dashboard)
-- [Project Structure](#-project-structure)
-- [Installation & Local Development](#-installation--local-development)
-  - [Prerequisites](#prerequisites)
-  - [Setup Steps](#setup-steps)
-  - [Environment Variables](#environment-variables)
-- [API Routes Reference](#-api-routes-reference)
-- [Contributing](#-contributing)
-- [License](#-license)
+- [🥗 AI Meal Plan — Full Stack SaaS Web App](#-ai-meal-plan--full-stack-saas-web-app)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [✅ Features](#-features)
+  - [🛠 Tech Stack](#-tech-stack)
+  - [🚀 Deployment](#-deployment)
+  - [🔐 Test and Admin User Access](#-test-and-admin-user-access)
+    - [Admin Access](#admin-access)
+  - [👤 How To Use App For Regular User](#-how-to-use-app-for-regular-user)
+    - [Step 1: Create an Account](#step-1-create-an-account)
+    - [Step 2: Login to System](#step-2-login-to-system)
+    - [Step 3: Choose a Subscription Plan](#step-3-choose-a-subscription-plan)
+    - [Step 4: Generate Your Customized Meal Plan](#step-4-generate-your-customized-meal-plan)
+    - [Step 5: View Your Current Plan](#step-5-view-your-current-plan)
+    - [Step 6: Update Your Plan](#step-6-update-your-plan)
+    - [Step 7: Cancel Your Plan](#step-7-cancel-your-plan)
+  - [🛡 How To Use App For Admin User](#-how-to-use-app-for-admin-user)
+    - [Managing Users via Clerk Dashboard](#managing-users-via-clerk-dashboard)
+    - [Managing Subscriptions via Stripe Dashboard](#managing-subscriptions-via-stripe-dashboard)
+  - [📁 Project Structure](#-project-structure)
+  - [💻 Installation \& Local Development](#-installation--local-development)
+    - [Prerequisites](#prerequisites)
+    - [Setup Steps](#setup-steps)
+    - [Environment Variables](#environment-variables)
+  - [📡 API Routes Reference](#-api-routes-reference)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
 
 ---
 
@@ -70,34 +75,31 @@
 
 The application is deployed as a single unified Next.js project (frontend + backend API routes) on Vercel.
 
-**🌐 Live App URL:** [APP URL](APP URL)
+**🌐 Live App URL:** [https://meal-plan-next-next-clerk-tcss-ts.vercel.app/](https://meal-plan-next-next-clerk-tcss-ts.vercel.app/)
 
 > **Note:** Use the Stripe test card `4242 4242 4242 4242` (any future expiry, any CVC) to test payments without real charges.
 
 ---
 
-## 🔐 Test and Admin Users Credentials
+## 🔐 Test and Admin User Access
 
-### Test User Credentials
+This application uses **Clerk Authentication**.
+To access the application:
+1. Click **Sign In** in the top navigation bar and sign in using your **Google**, **GitHub**, or **Apple** account.
+2. Alternatively, click **Sign Up** in the top navigation bar.
+3. Create a new account using your own email address.
+4. Enter the verification code sent to your email.
+5. After successfully signing up, you will be automatically signed in and redirected to the application.
+> **Note:** No preconfigured test or demo account is provided because Clerk requires email verification for new users.
 
-Use these credentials to explore the app as a regular subscribed user:
+### Admin Access
 
-| Field | Value |
-|---|---|
-| **Email** | `testuser@example.com` |
-| **Password** | `TestUser123!` |
-| **Subscription** | Monthly Plan (active) |
-
-### Admin User Credentials
-
-Admin access is managed via the **Clerk Dashboard** and **Stripe Dashboard** — there is no separate admin UI in the app itself.
-
-| Dashboard | URL |
-|---|---|
-| **Clerk Dashboard** | [https://dashboard.clerk.com](https://dashboard.clerk.com) |
+This project does **not** include a separate admin interface. Administrative tasks are managed through the external dashboards below.
+| Dashboard            | URL                                                          |
+| :------------------- | :----------------------------------------------------------- |
+| **Clerk Dashboard**  | [https://dashboard.clerk.com](https://dashboard.clerk.com)   |
 | **Stripe Dashboard** | [https://dashboard.stripe.com](https://dashboard.stripe.com) |
-
-> Contact the project owner for Clerk/Stripe admin credentials.
+> **Note:** Administrator access to the Clerk and Stripe dashboards is restricted to the project owner. If you require administrative access, please contact the project owner.
 
 ---
 
@@ -105,26 +107,32 @@ Admin access is managed via the **Clerk Dashboard** and **Stripe Dashboard** —
 
 ### Step 1: Create an Account
 
-1. Visit the app at [APP URL](APP URL)
+1. Visit the app at [https://meal-plan-next-next-clerk-tcss-ts.vercel.app/](https://meal-plan-next-next-clerk-tcss-ts.vercel.app/)
 2. Click **Sign Up** in the top navigation bar
 3. Register with your email address and a password
 4. Your user profile is automatically created in the database on first sign-in
 
-### Step 2: Choose a Subscription Plan
+### Step 2: Login to System
 
-1. After signing in, you will be redirected to the **Subscribe** page
+1. Visit the app at [https://meal-plan-next-next-clerk-tcss-ts.vercel.app/](https://meal-plan-next-next-clerk-tcss-ts.vercel.app/)
+2. Click **Sign In** in the top navigation bar
+3. Enter the credential you registered earlier, or sign in using your **Google**, **GitHub**, or **Apple** account by clicking the appropriate icon.
+
+### Step 3: Choose a Subscription Plan
+
+1. Click **Mealplan** in the top navigation bar. If you didn’t subscribe to any Weekly, Monthly, or Yearly plan, the **Subscribe** option will appear; otherwise, the **Generate Your Customized Meal Plan** option will appear.
 2. Choose from one of three plans:
    - **Weekly Plan** — $9.99/week — Great for trying the service
    - **Monthly Plan** — $39.99/month — Best for ongoing meal planning *(Most Popular)*
    - **Yearly Plan** — $299.99/year — Best value for long-term users
 3. Click **Subscribe** on your chosen plan
 4. You will be redirected to Stripe Checkout — enter your payment details
-   - For testing, use card number: `4242 4242 4242 4242`
+   - For testing, use Stripe test card number: `4242 4242 4242 4242` and for expiry, enter any future date and enter any CVC.
 5. After successful payment, you are redirected back to the app with your subscription activated
 
-### Step 3: Generate Your Meal Plan
+### Step 4: Generate Your Customized Meal Plan
 
-1. Navigate to **Mealplan** from the top navigation
+1. Click **Mealplan** in the top navigation bar. If you didn’t subscribe to any Weekly, Monthly, or Yearly plan, the **Subscribe** option will appear; otherwise, the **Generate Your Customized Meal Plan** option will appear.
 2. Fill in the meal plan form:
    - **Diet Type** — e.g., Vegetarian, Keto, Mediterranean
    - **Daily Calorie Goal** — between 500 and 5,000 calories
@@ -135,12 +143,20 @@ Admin access is managed via the **Clerk Dashboard** and **Stripe Dashboard** —
 4. Your personalised 7-day meal plan will appear in the calendar view
 5. Click any day on the calendar to view that day's meals (Breakfast, Lunch, Dinner, Snacks)
 
-### Step 4: Manage Your Profile
+### Step 5: View Your Current Plan
 
-1. Navigate to **Profile** from the top navigation
-2. View your current subscription plan and account details
-3. To **change your plan** — select a new plan from the dropdown and confirm
-4. To **cancel your subscription** — click **Unsubscribe**; your access remains active until the end of the current billing period
+1. If you are signed in, you will see the **Profile** option in the top navigation; click it.
+2. You will see **Current Plan** heading, in which you will see your current subscription plan.
+
+### Step 6: Update Your Plan
+
+1. If you are signed in, you will see the **Profile** option in the top navigation; click it.
+2. You will see **Change Subscription Plan** heading, select your desired plan from the list for change, and then click **Save** button.
+
+### Step 7: Cancel Your Plan
+
+1. If you are signed in, you will see the **Profile** option in the top navigation; click it.
+2. You will see **Unsubscribe** heading in the end, under that heading click **Unsubscribe** button.
 
 ---
 
@@ -233,8 +249,8 @@ Admin management is handled through external dashboards — no separate in-app a
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/meal-plan.git
-   cd meal-plan
+   git clone https://github.com/tauseefiqbal/meal_plan-next-next-clerk-tcss-ts.git 
+   cd meal_plan-next-next-clerk-tcss-ts
    ```
 
 2. **Install dependencies:**
